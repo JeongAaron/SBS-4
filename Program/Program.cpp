@@ -40,7 +40,6 @@ public:
 	void push_back(T data)
 	{
 		Node* newNode = new Node;
-		Node* currentNode = nullptr;
 		if (head == nullptr)
 		{
 			head = newNode;
@@ -49,10 +48,36 @@ public:
 		}
 		else
 		{
+			Node* currentNode = head;
+			while (currentNode->next != nullptr)
+			{
+				currentNode = currentNode->next;
+			}
+			currentNode->next = newNode;
 			newNode->data = data;
 			newNode->next = nullptr;
 		}
 		size++;
+	}
+	void print()
+	{
+		Node* currentNode = head;
+		while (currentNode != nullptr)
+		{
+			cout << currentNode->data << " ";
+			currentNode = currentNode->next;
+		}
+	}
+	~SingleLinkedList()
+	{
+		Node* currentNode;
+		while (head->next != nullptr)
+		{
+			currentNode = head;
+			head = head->next;
+			delete currentNode;
+
+		}
 	}
 };
 
@@ -61,4 +86,8 @@ int main()
 	SingleLinkedList<int> single;
 	single.push_front(10);
 	single.push_front(20);
+	single.push_front(30);
+	single.push_back(40);
+	single.push_back(50);
+	single.print();
 }
