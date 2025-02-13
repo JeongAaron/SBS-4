@@ -1,0 +1,17 @@
+﻿  Program.cpp
+C:\Users\Administrator\Desktop\SBS-4\Program\Program.cpp(51,14): error C2440: '=': 'SingleLinkedList<int>::Node **'에서 'SingleLinkedList<int>::Node *'(으)로 변환할 수 없습니다.
+  C:\Users\Administrator\Desktop\SBS-4\Program\Program.cpp(51,14):
+  가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 괄호가 있는 함수 스타일 캐스트가 필요합니다.
+  C:\Users\Administrator\Desktop\SBS-4\Program\Program.cpp(51,14):
+  템플릿 인스턴스화 컨텍스트(가장 오래된 인스턴스화 컨텍스트)가
+  	C:\Users\Administrator\Desktop\SBS-4\Program\Program.cpp(61,24):
+  	컴파일되는 클래스 템플릿 인스턴스화 'SingleLinkedList<int>'에 대한 참조를 확인하세요.
+  	C:\Users\Administrator\Desktop\SBS-4\Program\Program.cpp(40,7):
+  	클래스 템플릿 멤버 함수 'void SingleLinkedList<int>::push_back(T)'을(를) 컴파일하는 중입니다.
+          with
+          [
+              T=int
+          ]
+  		C:\Users\Administrator\Desktop\SBS-4\Program\Program.cpp(64,18):
+  		'main'에서 'SingleLinkedList<int>::push_back'에 대한 첫 번째 참조를 확인하세요.
+  
