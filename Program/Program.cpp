@@ -59,7 +59,21 @@ public:
 		}
 		size++;
 	}
-	void print()
+	void pop_pront()
+	{
+		if (head != nullptr)
+		{
+			Node* currentNode = head;
+			head = currentNode->next;
+			delete currentNode;
+			size--;
+		}
+		else
+		{
+			cout << "empty" << endl;
+		}
+	}
+	void Show()
 	{
 		Node* currentNode = head;
 		while (currentNode != nullptr)
@@ -68,15 +82,41 @@ public:
 			currentNode = currentNode->next;
 		}
 	}
+	void pop_back()
+	{
+		if (head == nullptr)
+		{
+			cout << "empty" << endl;
+		}
+		else if (head->next != nullptr)
+		{
+			Node* previousNode = head;
+			Node* deleteNode = head->next;
+			while (deleteNode->next != nullptr)
+			{
+				previousNode = deleteNode;
+				deleteNode = deleteNode->next;
+			}
+			previousNode->next = deleteNode->next;
+			delete deleteNode;
+			size--;
+		}
+		else if (head->next == nullptr)
+		{
+			delete head;
+			head = nullptr;
+			size--;
+		}
+	}
 	~SingleLinkedList()
 	{
-		Node* currentNode;
-		while (head->next != nullptr)
+		Node* currentNode = head;
+		while (currentNode != nullptr)
 		{
-			currentNode = head;
-			head = head->next;
+			Node* nextNode = currentNode->next;
 			delete currentNode;
-
+			currentNode = nextNode;
+			//	cout << "delete" << endl;
 		}
 	}
 };
@@ -88,6 +128,7 @@ int main()
 	single.push_front(20);
 	single.push_front(30);
 	single.push_back(40);
-	single.push_back(50);
-	single.print();
+	single.pop_back();
+	single.pop_back();
+	single.Show();
 }
