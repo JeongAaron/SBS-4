@@ -4,47 +4,56 @@ using namespace std;
 
 template <typename T>
 
-class SingleLinkedList
+class DoubleLinkedList
 {
 private:
 	int size;
 	struct Node
 	{
 		T data;
+		Node* previous;
 		Node* next;
 	};
 	Node* head;
+	Node* tail;
 public:
-	SingleLinkedList()
+	DoubleLinkedList()
 	{
 		size = 0;
 		head = nullptr;
+		tail = nullptr;
 	}
-	void push_front(T data)
+	void push_pront(T data)
 	{
 		Node* newNode = new Node;
-		if (head == nullptr)
+		if (head == nullptr && tail == nullptr)
 		{
 			head = newNode;
 			newNode->data = data;
 			newNode->next = nullptr;
+			newNode->previous = nullptr;
+			size++
 		}
 		else
 		{
+			head->previous = newNode;
 			newNode->data = data;
 			newNode->next = head;
+			newNode->previous = nullptr;
 			head = newNode;
+			size++
 		}
-		size++;
 	}
 	void push_back(T data)
 	{
 		Node* newNode = new Node;
-		if (head == nullptr)
+		if (head == nullptr && tail == nullptr)
 		{
 			head = newNode;
 			newNode->data = data;
 			newNode->next = nullptr;
+			newNode->previous = nullptr;
+			size++
 		}
 		else
 		{
@@ -56,79 +65,43 @@ public:
 			currentNode->next = newNode;
 			newNode->data = data;
 			newNode->next = nullptr;
+			newNode->previous = currentNode;
+			size++
 		}
-		size++;
 	}
 	void pop_pront()
 	{
-		if (head != nullptr)
+		if (size == 0)
 		{
-			Node* currentNode = head;
-			head = currentNode->next;
-			delete currentNode;
-			size--;
+			cout << "empty" << endl;
 		}
 		else
 		{
-			cout << "empty" << endl;
-		}
-	}
-	void Show()
-	{
-		Node* currentNode = head;
-		while (currentNode != nullptr)
-		{
-			cout << currentNode->data << " ";
-			currentNode = currentNode->next;
-		}
-	}
-	void pop_back()
-	{
-		if (head == nullptr)
-		{
-			cout << "empty" << endl;
-		}
-		else if (head->next != nullptr)
-		{
-			Node* previousNode = head;
-			Node* deleteNode = head->next;
-			while (deleteNode->next != nullptr)
+			Node* currentNode = head;
+			if (size == 1)
 			{
-				previousNode = deleteNode;
-				deleteNode = deleteNode->next;
+				delete currentNode;
+				size--;
 			}
-			previousNode->next = deleteNode->next;
-			delete deleteNode;
-			size--;
-		}
-		else if (head->next == nullptr)
-		{
-			delete head;
-			head = nullptr;
-			size--;
-		}
-	}
-	~SingleLinkedList()
-	{
-		Node* currentNode = head;
-		while (currentNode != nullptr)
-		{
-			Node* nextNode = currentNode->next;
-			delete currentNode;
-			currentNode = nextNode;
-			//	cout << "delete" << endl;
+			else
+			{
+				while (currentNode->previous != nullptr)
+				{
+					currentNode = currentNode->previous;
+				}
+				currentNode->next = head;
+				head->previous = currentNode->previous;
+				delete currentNode;
+				size--;
+			}
 		}
 	}
+
 };
 
 int main()
 {
-	SingleLinkedList<int> single;
-	single.push_front(10);
-	single.push_front(20);
-	single.push_front(30);
-	single.push_back(40);
-	single.pop_back();
-	single.pop_back();
-	single.Show();
+	DoubleLinkedList<int> dobleLinkedList;
+	dobleLinkedList.push_pront(10);
+	dobleLinkedList.push_pront(20);
 }
