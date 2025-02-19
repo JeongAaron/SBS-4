@@ -4,72 +4,57 @@ using namespace std;
 
 template <typename T>
 
-class DoubleLinkedList
+class CircleLinkedList
 {
 private:
 	int size;
 	struct Node
 	{
 		T data;
-		Node* previous;
 		Node* next;
 	};
 	Node* head;
-	Node* tail;
 public:
-	DoubleLinkedList()
+	CircleLinkedList()
 	{
 		size = 0;
 		head = nullptr;
-		tail = nullptr;
-	}
-	void push_pront(T data)
-	{
-		Node* newNode = new Node;
-		if (head == nullptr && tail == nullptr)
-		{
-			head = newNode;
-			newNode->data = data;
-			newNode->next = nullptr;
-			newNode->previous = nullptr;
-			size++
-		}
-		else
-		{
-			head->previous = newNode;
-			newNode->data = data;
-			newNode->next = head;
-			newNode->previous = nullptr;
-			head = newNode;
-			size++
-		}
 	}
 	void push_back(T data)
 	{
 		Node* newNode = new Node;
-		if (head == nullptr && tail == nullptr)
+		newNode->data = data;
+		if (size == 0)
 		{
 			head = newNode;
-			newNode->data = data;
-			newNode->next = nullptr;
-			newNode->previous = nullptr;
-			size++
+			newNode->next = newNode;
 		}
 		else
 		{
-			Node* currentNode = head;
-			while (currentNode->next != nullptr)
-			{
-				currentNode = currentNode->next;
-			}
-			currentNode->next = newNode;
-			newNode->data = data;
-			newNode->next = nullptr;
-			newNode->previous = currentNode;
-			size++
+			newNode->next = head->next;
+			head->next = newNode;
+			head = newNode;
 		}
+		size++;
 	}
-	void pop_pront()
+	void push_front(T data)
+	{
+		Node* newNode = new Node;
+		if (size == 0)
+		{
+			newNode->data = data;
+			head = newNode;
+			newNode->next = newNode;
+		}
+		else
+		{
+			newNode->data = data;
+			newNode->next = head->next;
+			head->next = newNode;
+		}
+		size++;
+	}
+	void show()
 	{
 		if (size == 0)
 		{
@@ -78,30 +63,23 @@ public:
 		else
 		{
 			Node* currentNode = head;
-			if (size == 1)
+			while (currentNode->next != head)
 			{
-				delete currentNode;
-				size--;
+				currentNode = currentNode->next;
+				cout << currentNode->data << " ";
 			}
-			else
-			{
-				while (currentNode->previous != nullptr)
-				{
-					currentNode = currentNode->previous;
-				}
-				currentNode->next = head;
-				head->previous = currentNode->previous;
-				delete currentNode;
-				size--;
-			}
+			cout << head->data << " ";
 		}
 	}
-
 };
-
 int main()
 {
-	DoubleLinkedList<int> dobleLinkedList;
-	dobleLinkedList.push_pront(10);
-	dobleLinkedList.push_pront(20);
+	CircleLinkedList<int> circleLinkedList;
+	circleLinkedList.push_back(10);
+	circleLinkedList.push_back(20);
+	circleLinkedList.push_back(30);
+	circleLinkedList.push_back(40);
+	circleLinkedList.show();
+
+
 }
