@@ -40,15 +40,14 @@ public:
 	void push_front(T data)
 	{
 		Node* newNode = new Node;
+		newNode->data = data;
 		if (size == 0)
 		{
-			newNode->data = data;
 			head = newNode;
 			newNode->next = newNode;
 		}
 		else
 		{
-			newNode->data = data;
 			newNode->next = head->next;
 			head->next = newNode;
 		}
@@ -56,30 +55,85 @@ public:
 	}
 	void show()
 	{
-		if (size == 0)
+		if(head != nullptr)
+		{
+			Node* currentNode = head->next;
+			for (int i = 0; i < size; i++)
+			{
+				cout << currentNode->data << " ";
+				currentNode = currentNode->next;
+			}
+		}
+		cout << endl;
+	}
+	void pop_front()
+	{
+		if (head == nullptr)
 		{
 			cout << "empty" << endl;
 		}
 		else
 		{
-			Node* currentNode = head;
-			while (currentNode->next != head)
+			Node* deleteNode = head->next;
+			if (head == head->next)
 			{
-				currentNode = currentNode->next;
-				cout << currentNode->data << " ";
+				head = nullptr;
 			}
-			cout << head->data << " ";
+			else
+			{
+				head->next = deleteNode->next;
+			}
+			delete deleteNode;
+			size--;
 		}
 	}
+	void pop_back()
+	{
+		if (head == nullptr)
+		{
+			cout << "empty" << endl;
+		}
+		else
+		{
+			Node* deleteNode = head;
+			Node* currentNode = head;
+			if (head = head->next)
+			{
+				head = nullptr;
+			}
+			else
+			{
+				for (int i = 0; i < size; i++)
+				{
+					currentNode = currentNode->next;
+				}
+				head = currentNode;
+				currentNode->next = deleteNode->next;
+			}
+			delete deleteNode;
+			size--;
+		}
+	}
+	void Size()
+	{
+		cout << "size : " << size << endl;
+	}
+	~CircleLinkedList()
+	{
+		while (head != nullptr)
+		{
+			pop_front();
+		}
+	}
+
 };
 int main()
 {
 	CircleLinkedList<int> circleLinkedList;
 	circleLinkedList.push_back(10);
 	circleLinkedList.push_back(20);
-	circleLinkedList.push_back(30);
-	circleLinkedList.push_back(40);
+	//circleLinkedList.push_back(30);
+	circleLinkedList.pop_back();
 	circleLinkedList.show();
-
-
+	circleLinkedList.Size();
 }
