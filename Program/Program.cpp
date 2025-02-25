@@ -1,40 +1,37 @@
 ﻿#include <iostream>
 
-#define SIZE 4
 using namespace std;
 
 template <typename T>
 
-class CircleQueue
+class Vector
 {
 private:
-	int rear;
-	int front;
-	T container[SIZE];
+	int size;
+	int capacity;
+	T* container;
 public:
-	CircleQueue()
+	Vector()
 	{
-		rear = SIZE - 1;
-		front = SIZE - 1;
-		for (int i = 0; i < SIZE; i++)
-		{
-			container[i] = NULL;
-		}
+		size = 0;
+		capacity = 0;
+		container = nullptr;
 	}
-	void push(T data)
+	void resize(int newSize)
 	{
-		void push(T data)
+		return newSize * 2;
+	}
+	void push_back(T data)
+	{
+		if (container == nullptr)
 		{
-			{
-				if (rear >= SIZE)
-				{
-					cout << "LinearQueue Overflow" << endl;
-				}
-				else
-				{
-					container[rear++] = data;
-				}
-			}
+			capacity = 1;
+			T* newContainer[capacity] = new T;
+			newContainer[capacity] = data;
+		}
+		else
+		{
+
 		}
 	}
 };

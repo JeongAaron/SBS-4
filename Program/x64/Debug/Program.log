@@ -1,3 +1,12 @@
 ﻿  Program.cpp
-C:\Users\Administrator\Desktop\SBS-4\Program\Program.cpp(74): warning C4172: 지역 변수 또는 임시의 주소를 반환하고 있습니다.
+C:\Users\Administrator\Desktop\SBS-4\Program\Program.cpp(57,21): warning C4553: '==': 식의 결과가 사용되지 않습니다. '='을(를) 의도했습니까?
+  C:\Users\Administrator\Desktop\SBS-4\Program\Program.cpp(57,21):
+  템플릿 인스턴스화 컨텍스트(가장 오래된 인스턴스화 컨텍스트)가
+  	C:\Users\Administrator\Desktop\SBS-4\Program\Program.cpp(76,19):
+  	컴파일되는 클래스 템플릿 인스턴스화 'CircleQueue<int>'에 대한 참조를 확인하세요.
+  	C:\Users\Administrator\Desktop\SBS-4\Program\Program.cpp(48,7):
+  	클래스 템플릿 멤버 함수 'void CircleQueue<int>::pop(void)'을(를) 컴파일하는 중입니다.
+  		C:\Users\Administrator\Desktop\SBS-4\Program\Program.cpp(83,18):
+  		'main'에서 'CircleQueue<int>::pop'에 대한 첫 번째 참조를 확인하세요.
+  
   Program.vcxproj -> C:\Users\Administrator\Desktop\SBS-4\Program\x64\Debug\Program.exe
