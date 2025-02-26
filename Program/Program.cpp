@@ -28,11 +28,18 @@ public:
 			newSize = newSize * 2;
 		}
 		T* newContainer = new T[newSize];
+		for (int i = 0; i < newSize; i++)
+		{
+			newContainer[i] = NULL;
+		}
 		for (int i = 0; i < size; i++)
 		{
 			newContainer[i] = container[i];
 		}
-		delete[] container;
+		if (container != nullptr)
+		{
+			delete[] container;
+		}
 		container = newContainer;
 		capacity = newSize;
 	}
@@ -44,20 +51,52 @@ public:
 		}
 		container[size++] = data;
 	}
-
-	void Size()
+	void pop_back()
 	{
-		cout << "Size : "<< size << endl;
-	}
-	void Capacity()
-	{
-		cout << "Capacity : "<< capacity << endl;
-	}
-	void print()
-	{
-		for (int i = 0; i < size; i++)
+		if (size == 0)
 		{
-			cout << container[i] << " ";
+			cout << "Vector is Empty" << endl;
+		}
+		else
+		{
+			container[--size] = NULL;
+		}
+	}
+	const T& front()
+	{
+		if (size != 0)
+		{
+			return container[0];
+		}
+	}
+	const T& back()
+	{
+		if (size != 0)
+		{
+			return container[size - 1];
+		}
+	}
+	const int& Size()
+	{
+		return size;
+	}
+	const int& Capacity()
+	{
+		return capacity;
+	}
+	const T& operator[](const int& index)
+	{
+		return  container[index];
+	}
+	void begin()
+	{
+		cout << &front() << endl;
+	}
+	~Vector()
+	{
+		if (container != nullptr)
+		{
+			delete[] container;
 		}
 	}
 };
@@ -72,8 +111,13 @@ int main()
 	vector.push_back(50);
 	vector.push_back(60);
 	vector.push_back(70);
-	vector.push_back(80);
-	vector.Capacity();
-	vector.Size();
-	vector.print();
+	vector.pop_back();
+	cout << "Size : " << vector.Size() << endl;
+	cout << "Capacity : " << vector.Capacity() << endl;
+	cout << "Front : " << vector.front() << endl;
+	cout << "Back : " << vector.back() << endl;
+	for (int i = 0; i < vector.Size(); i++)
+	{
+		cout << vector[i] << " ";
+	}
 }
