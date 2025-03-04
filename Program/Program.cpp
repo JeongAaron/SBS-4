@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+
 #define SIZE 6
 
 using namespace std;
@@ -45,12 +46,55 @@ public:
 		}
 		return k % SIZE;
 	}
+	Node* CreateNode(KEY key, VALUE value)
+	{
+		Node* newNode = new Node;
+		newNode->key = key;
+		newNode->value = value;
+		newNode->Next = nullptr;
+		return newNode;
+	}
+	void Insert(KEY key, VALUE value)
+	{
+		int hashindex = HashFuction(key);
+		Node* newNode = CreateNode(key, value);
+		if (bucket[hashindex].head == nullptr)
+		{
+			bucket[hashindex].head = newNode;
+		}
+		else
+		{
+			newNode->Next = bucket[hashindex].head;
+			bucket[hashindex].head = newNode;
+		}
+		bucket[hashindex].count++;
+	}
+	~HashTable()
+	{
+		for (int i = 0; i < SIZE; i++)
+		{
+			Node* deleteNode = bucket[i].head;
+			Node* nextNode = bucket[i].head;
+			if (bucket[i].head == nullptr)
+			{
+				continue;
+			}
+			else
+			{
+				while (nextNode != nullptr)
+				{
+					nextNode = deleteNode->Next;
+					delete deleteNode;
+					deleteNode = nextNode;
+				}
+			}
+		}	
+	}
 };
 
 int main()
 {
-	HashTable<int,string> hashTable;
-	cout << hashTable.HashFuction("key") << endl;
-	cout << hashTable.HashFuction(12) << endl;
-
+	HashTable<const char*,int> hashTable;
+	hashTable.Insert("Sword", 10000);
+	hashTable.Insert("Armor", 5000);
 }
