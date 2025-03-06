@@ -1,2 +1,16 @@
 ﻿  Program.cpp
+C:\Users\Administrator\Desktop\SBS-4\Program\Program.cpp(38,5): warning C4102: 'std': 참조되지 않은 레이블입니다.
+  C:\Users\Administrator\Desktop\SBS-4\Program\Program.cpp(38,5):
+  템플릿 인스턴스화 컨텍스트(가장 오래된 인스턴스화 컨텍스트)가
+  	C:\Users\Administrator\Desktop\SBS-4\Program\Program.cpp(94,21):
+  	컴파일되는 클래스 템플릿 인스턴스화 'PriorityQueue<int>'에 대한 참조를 확인하세요.
+  	C:\Users\Administrator\Desktop\SBS-4\Program\Program.cpp(23,7):
+  	클래스 템플릿 멤버 함수 'void PriorityQueue<int>::push(T)'을(를) 컴파일하는 중입니다.
+          with
+          [
+              T=int
+          ]
+  		C:\Users\Administrator\Desktop\SBS-4\Program\Program.cpp(95,20):
+  		'main'에서 'PriorityQueue<int>::push'에 대한 첫 번째 참조를 확인하세요.
+  
   Program.vcxproj -> C:\Users\Administrator\Desktop\SBS-4\Program\x64\Debug\Program.exe
