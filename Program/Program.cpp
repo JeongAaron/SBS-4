@@ -1,110 +1,79 @@
 ﻿#include <iostream>
 
-#define SIZE 8
+#define SIZE 10
 
 using namespace std;
 
 template <typename T>
 
-class PriorityQueue
+class AdjacencyMatrix
 {
 private:
-	int index;
-	T container[SIZE];
+	int count;
+	T vertex[SIZE];
+	int matrix[SIZE][SIZE];
 public:
-	PriorityQueue()
+	AdjacencyMatrix()
 	{
-		index = 0;
+		count = 0;
 		for (int i = 0; i < SIZE; i++)
 		{
-			container[i] = NULL;
+			vertex[i] = NULL;
+			for (int j = 0; j < SIZE; j++)
+			{
+				matrix[i][j] = 0;
+			}
 		}
 	}
 	void push(T data)
 	{
-		if (index + 1 >= SIZE)
+		if (count < SIZE)
 		{
-			cout << "Priority Queue Overflow" << endl;
+			vertex[count++] = data;
 		}
 		else
 		{
-			container[++index] = data;
-			int child = index;
-			int parent = child / 2;
-			while (child > 1)
+			cout << "Vertex is overflow" << endl;
+		}
+	}
+	void edge(int i, int j)
+	{
+		if (count <= 0)
+		{
+			cout << "Vertex is Empty" << endl;
+		}
+		else
+		{
+			if (i >= count || i >= count)
 			{
-				if (container[parent] < container[child])
-				{
-				std:swap(container[parent], container[child]);
-				}
-				child = parent;
-				parent = child / 2;
+				cout << "Edge is out of range" << endl;
+			}
+			else
+			{
+				matrix[i][j] = 1;
+				matrix[j][i] = 1;
 			}
 		}
 	}
-	const T& top()
+	void show()
 	{
-		return container[1];
-	}
-	const bool empty()
-	{
-		if (index <= 0)
+		for (int i = 0; i < count; i++)
 		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	void pop()
-	{
-		if (index < 1)
-		{
-			cout << "Priority Queue Empty" << endl;
-		}
-		else
-		{
-			container[1] = container[index];
-			container[index--] = NULL;
-			int parent = 1;
-			while (parent * 2 <= index)
+			for (int j = 0; j < count; j++)
 			{
-				int child = parent * 2;
-				if (container[child] < container[child + 1])
-				{
-					child++;
-				}
-				if (container[child] < container[parent])
-				{
-					break;
-				}
-				else
-				{
-					std::swap(container[parent], container[child]);
-					parent = child;
-				}
+				cout << matrix[i][j] << " ";
 			}
+			cout << endl;
 		}
 	}
 };
-
 int main()
 {
-	PriorityQueue<int> priorityQueue;
-	priorityQueue.push(30);
-	priorityQueue.push(20);
-	priorityQueue.push(50);
-	priorityQueue.push(60);
-	priorityQueue.push(10);
-	priorityQueue.push(70);
-	priorityQueue.push(100);
-	while (priorityQueue.empty() == false)
-	{
-		cout << priorityQueue.top() << endl;
-		priorityQueue.pop();
-	}
-
-	
+	AdjacencyMatrix<char> matrix;
+	matrix.push('A');
+	matrix.push('B');
+	matrix.push('C');
+	matrix.edge(1, 1);
+	matrix.show();
 
 }
