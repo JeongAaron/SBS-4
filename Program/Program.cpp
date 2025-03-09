@@ -57,11 +57,18 @@ public:
 	}
 	void show()
 	{
-		for (int i = 0; i < count; i++)
+		cout << "  ";
+		for (int i = 0; i < count;i++)
 		{
-			for (int j = 0; j < count; j++)
+			cout << vertex[i] << " ";
+		}
+		cout << endl;
+		for (int j = 0; j < count;j++)
+		{
+			cout << vertex[j] << " ";
+			for (int k = 0;k < count;k++)
 			{
-				cout << matrix[i][j] << " ";
+				cout << matrix[j][k] << " ";
 			}
 			cout << endl;
 		}
@@ -73,7 +80,8 @@ int main()
 	matrix.push('A');
 	matrix.push('B');
 	matrix.push('C');
-	matrix.edge(1, 1);
+	matrix.edge(0, 1);
+	matrix.edge(1, 2);
 	matrix.show();
 
 }
