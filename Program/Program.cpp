@@ -6,23 +6,30 @@ using namespace std;
 
 template <typename T>
 
-class AdjacencyMatrix
+class AdjacencyList
 {
 private:
 	int count;
 	T vertex[SIZE];
-	int matrix[SIZE][SIZE];
+	struct Node
+	{
+		T data;
+		Node* next;
+		Node(T data, Node* link = nullptr)
+		{
+			this->data = data;
+			next = link;
+		}
+	};
+	Node* list[SIZE];
 public:
-	AdjacencyMatrix()
+	AdjacencyList()
 	{
 		count = 0;
 		for (int i = 0; i < SIZE; i++)
 		{
 			vertex[i] = NULL;
-			for (int j = 0; j < SIZE; j++)
-			{
-				matrix[i][j] = 0;
-			}
+			list[i] = NULL;
 		}
 	}
 	void push(T data)
@@ -30,58 +37,45 @@ public:
 		if (count < SIZE)
 		{
 			vertex[count++] = data;
+			
 		}
 		else
 		{
-			cout << "Vertex is overflow" << endl;
+			cout << "Adjacency List is overflow" << endl;
 		}
 	}
 	void edge(int i, int j)
 	{
 		if (count <= 0)
 		{
-			cout << "Vertex is Empty" << endl;
+			cout << "Adjacency List is Empty" << endl;
 		}
 		else
 		{
-			if (i >= count || i >= count)
+			if (i >= count || j >= count)
 			{
-				cout << "Edge is out of range" << endl;
+				cout << "Index is out of range" << endl;
 			}
 			else
 			{
-				matrix[i][j] = 1;
-				matrix[j][i] = 1;
+				list[i] = new Node(vertex[j], list[i]);
+				list[j] = new Node(vertex[i], list[j]);
 			}
 		}
+		
 	}
-	void show()
+	~AdjacencyList()
 	{
-		cout << "  ";
-		for (int i = 0; i < count;i++)
+		for (int i = 0; i < SIZE; i++)
 		{
-			cout << vertex[i] << " ";
-		}
-		cout << endl;
-		for (int j = 0; j < count;j++)
-		{
-			cout << vertex[j] << " ";
-			for (int k = 0;k < count;k++)
+			if (list[i] != nullptr)
 			{
-				cout << matrix[j][k] << " ";
+				delete[] list[i];
 			}
-			cout << endl;
 		}
 	}
 };
 int main()
 {
-	AdjacencyMatrix<char> matrix;
-	matrix.push('A');
-	matrix.push('B');
-	matrix.push('C');
-	matrix.edge(0, 1);
-	matrix.edge(1, 2);
-	matrix.show();
 
 }
